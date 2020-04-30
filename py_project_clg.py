@@ -38,6 +38,7 @@ def view_screen_pre(root, qry, foldr, subj, rcr):
 
 def view_screen(rt, mail):
     deleter = GMailDeleter()
+    modifier = GMailModifier()
     id = ""
     frm = "From"
     subject = "Subject"
@@ -73,6 +74,9 @@ def view_screen(rt, mail):
     
     button = tk.Button(frame, text='Main', bg='grey', command = lambda rt=root: main_screen(rt)) 
     button.place(relx=0.05,rely='0.9',relheight='0.05',relwidth='0.2')
+    
+    button = tk.Button(frame, text='Download', bg='grey',  command = lambda id=id:modifier.trash_message(id)) 
+    button.place(relx=0.35,rely='0.9',relheight='0.05',relwidth='0.25')
     
     button = tk.Button(frame, text='Delete', bg='grey', command = lambda id=id:deleter.delete_message(id)) 
     button.place(relx=0.7,rely='0.9',relheight='0.05',relwidth='0.2')
