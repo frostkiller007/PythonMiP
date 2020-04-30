@@ -1,6 +1,7 @@
 import tkinter as tk
 from gmail_reader import GMailReader
 from gmail_sender import GMailSender
+from gmail_deleter import GMailDeleter
 from message_maker import create_message
 import sys
 
@@ -36,10 +37,13 @@ def view_screen_pre(root, qry, foldr, subj, rcr):
     view_screen(root, mail)
 
 def view_screen(rt, mail):
+    deleter = GMailDeleter()
+    id = ""
     frm = "From"
     subject = "Subject"
     body = "Body"
     try:
+        id = mail['id']
         headers = mail['payload']['headers']
         for header in headers:
             if(header['name'] == "Subject"):
@@ -70,10 +74,7 @@ def view_screen(rt, mail):
     button = tk.Button(frame, text='Main', bg='grey', command = lambda rt=root: main_screen(rt)) 
     button.place(relx=0.05,rely='0.9',relheight='0.05',relwidth='0.2')
     
-    button = tk.Button(frame, text='Download', bg='grey') 
-    button.place(relx=0.35,rely='0.9',relheight='0.05',relwidth='0.25')
-    
-    button = tk.Button(frame, text='Delete', bg='grey') 
+    button = tk.Button(frame, text='Delete', bg='grey', command = lambda id=id:deleter.delete_message(id)) 
     button.place(relx=0.7,rely='0.9',relheight='0.05',relwidth='0.2')
     
     label = tk.Label(frame, text='From') 
@@ -124,7 +125,7 @@ def search_screen(rt):
     frame_lower = tk.Frame(root, bg='yellow', bd=5)
     frame_lower.place(relx=0.5,rely =0.7, relwidth=1, relheight=0.3, anchor='n')
     
-    label_r= tk.Label(frame,font = 40, text = 'Receiver' ,)
+    label_r= tk.Label(frame,font = 40, text = 'Sender' ,)
     label_r.place(relx = 0.1, rely = 0.05, relheight = 0.05, relwidth = 0.3 )
     
     receiver = tk.Entry(frame, font = 40, textvariable=rcr)
@@ -239,9 +240,6 @@ def main_screen(rt=None):
     
     label = tk.Label(frame, text='Home Screen', bg='peach puff') 
     label.place(relx='0.35',rely='0.25',relheight='0.15',relwidth='0.25')
-    
-    button = tk.Button(frame, text='View', bg='white', command = view_screen)
-    button.place(relx='0.05',rely='0.4',relheight='0.20',relwidth='0.2')
     
     button = tk.Button(frame, text='Search', bg='white', command = lambda rt=root:search_screen(rt) )
     button.place(relx='0.35',rely='0.4',relheight='0.20',relwidth='0.25')
