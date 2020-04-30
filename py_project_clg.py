@@ -7,7 +7,7 @@ import sys
 ############### VIEW YOUR MAIL SCREEN ################
 WIDTH=600
 HEIGHT=600
-SELF = sys.argv()[1]
+SELF = sys.argv[1]
 if(not SELF):
     sys.exit("Email-ID not specified")
 
