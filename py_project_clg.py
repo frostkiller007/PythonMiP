@@ -2,6 +2,7 @@ import tkinter as tk
 from gmail_reader import GMailReader
 from gmail_sender import GMailSender
 from gmail_deleter import GMailDeleter
+from gmail_modifier import GMailModifier
 from message_maker import create_message
 import sys
 
