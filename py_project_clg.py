@@ -2,11 +2,14 @@ import tkinter as tk
 from gmail_reader import GMailReader
 from gmail_sender import GMailSender
 from message_maker import create_message
+import sys
 
 ############### VIEW YOUR MAIL SCREEN ################
 WIDTH=600
 HEIGHT=600
-SELF = "YOUR EMAIL-ID HERE"
+SELF = sys.argv(1)
+if(not SELF):
+    sys.exit("Email-ID not specified")
 
 def view_screen_pre(root, qry, foldr, subj, rcr):
     query = ""
